@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from puppy.views import PuppyListView
-
+from puppy.views import PuppyListView, AddPuppy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('puppies/', PuppyListView.as_view())
+    path('puppies/', PuppyListView.as_view()),
+    path('addPuppy/', AddPuppy.as_view()),
+    
 ]

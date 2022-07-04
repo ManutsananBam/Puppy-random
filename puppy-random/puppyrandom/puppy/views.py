@@ -13,7 +13,16 @@ class PuppySerializer(serializers.Serializer):
 
 class PuppyListView(APIView):
     def get(self, request):
-        puppies = Puppy.objects.all()
-        serialized = PuppySerializer(puppies, many=True)
-        data = serialized.data
-        return Response(data)
+        if request.method == 'GET':
+            puppies = Puppy.objects.all()
+            serialized = PuppySerializer(puppies, many=True)
+            data = serialized.data
+            return Response(data)
+
+class AddPuppy(APIView):
+    def add(self, request):
+        if request.method == 'POST':
+            serialized = PuppySerializer(data=request.data)
+            if serialized.is_valid():
+                serialized.save()
+                return Response(serialized)
