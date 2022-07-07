@@ -21,9 +21,11 @@ class PuppyList(generics.ListCreateAPIView):
     serializer_class = PuppySerializer
 
 class PuppyRandom(APIView):
-    def get(self, request):
+    def get(self, request): 
         puppies = Puppy.objects.all()
         ids = puppies.values_list('id', flat=True)
         random_id = random.choice(ids)
-        return Response(random_id)
+        puppy = Puppy.objects.get(id=random_id)
+        serialized = PuppySerializer(puppy)
+        return Response(serialized.data)
         
