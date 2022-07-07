@@ -22,8 +22,8 @@ class PuppyList(generics.ListCreateAPIView):
 
 class PuppyRandom(APIView):
     def get(self, request):
-        rand = Puppy.objects.all()
-        ids = rand.values_list('id', flat=True)
-        random_image = random.choice(ids)
-        return Response(random_image)
+        puppies = Puppy.objects.all()
+        ids = puppies.values_list('id', flat=True)
+        random_id = random.choice(ids)
+        return Response(random_id)
         
